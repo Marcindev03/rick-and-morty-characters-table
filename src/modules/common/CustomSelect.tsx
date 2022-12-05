@@ -22,7 +22,9 @@ export const CustomSelect: FC<CustomSelectProps> = ({
       {...props}
     >
       {availableOptions.map(({ label, value }) => (
-        <option value={value}>{label}</option>
+        <option key={label} value={value}>
+          {label}
+        </option>
       ))}
     </Select>
   </CustomInputGroup>

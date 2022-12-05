@@ -1,11 +1,15 @@
-import { Heading, HStack } from "@chakra-ui/react";
+import { Heading, HStack, Skeleton } from "@chakra-ui/react";
 import { FC, useState } from "react";
+import { useCharactersQuery } from "../../lib";
 import { SPECIES } from "../../mocks";
 import { CustomSearchbar } from "../common";
 import { CustomSelect } from "../common/CustomSelect";
 import { CharactersContainer } from "./CharactersContainer";
+import { CharactersTable } from "./CharactersTable";
 
 export const Characters: FC = () => {
+  const { data, isLoading } = useCharactersQuery();
+
   const [selectedSpecies, setSelectedSpecies] = useState("");
 
   return (
@@ -21,6 +25,10 @@ export const Characters: FC = () => {
           onChange={setSelectedSpecies}
         />
       </HStack>
+
+      <Skeleton isLoaded={!isLoading}>
+        <CharactersTable characters={data?.results ?? []} />
+      </Skeleton>
     </CharactersContainer>
   );
 };
