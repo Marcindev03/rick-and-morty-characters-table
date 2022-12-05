@@ -31,6 +31,13 @@ const config = {
       100: "#FF2626",
     },
   },
+  styles: {
+    global: {
+      "html, body": {
+        backgroundColor: "primaryBlueLight.100",
+      },
+    },
+  },
 };
 
 export const theme = extendTheme(config);
