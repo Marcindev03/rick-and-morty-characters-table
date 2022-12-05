@@ -1,5 +1,11 @@
+import { Characters } from "./modules";
+
 function App() {
-  return <div></div>;
+  return (
+    <main>
+      <Characters />
+    </main>
+  );
 }
 
 export default App;
