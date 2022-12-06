@@ -30,7 +30,7 @@ type CharactersTableProps = {
 
 export const CharactersTable: FC<CharactersTableProps> = ({ characters }) => {
   return (
-    <TableContainer>
+    <TableContainer backgroundColor={"primaryWhite.400"}>
       <Table>
         <Thead>
           <Tr>

@@ -6,11 +6,21 @@ import { CustomSearchbar } from "../common";
 import { CustomSelect } from "../common/CustomSelect";
 import { CharactersContainer } from "./CharactersContainer";
 import { CharactersTable } from "./CharactersTable";
+import { PaginationControls } from "../common";
 
 export const Characters: FC = () => {
-  const { data, isLoading } = useCharactersQuery();
+  const [species, setSpecies] = useState("");
+  const [page, setPage] = useState(0);
 
-  const [selectedSpecies, setSelectedSpecies] = useState("");
+  const { data, isLoading, refetch } = useCharactersQuery({
+    page,
+    species,
+  });
+
+  const handlePageChange = (page: number) => {
+    setPage(page);
+    refetch();
+  };
 
   return (
     <CharactersContainer>
@@ -21,14 +31,16 @@ export const Characters: FC = () => {
         <CustomSelect
           placeholder="Species"
           availableOptions={SPECIES}
-          value={selectedSpecies}
-          onChange={setSelectedSpecies}
+          value={species}
+          onChange={setSpecies}
         />
       </HStack>
 
       <Skeleton isLoaded={!isLoading}>
         <CharactersTable characters={data?.results ?? []} />
       </Skeleton>
+
+      <PaginationControls totalPages={12} onPageChange={handlePageChange} />
     </CharactersContainer>
   );
 };
