@@ -10,6 +10,10 @@ export const SPECIES: Option[] = [
     label: "Alien",
     value: "alien",
   },
+  {
+    label: "Humanoid",
+    value: "humanoid",
+  },
 ];
 
 export const DEFAULT_FILTERS: CharacterFilter = {

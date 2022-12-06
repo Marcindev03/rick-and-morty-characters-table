@@ -1,6 +1,10 @@
 import { Heading, Skeleton } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
-import { useCharactersQuery } from "../../lib";
+import {
+  CHARACTERS_QUERY_KEY,
+  queryClient,
+  useCharactersQuery,
+} from "../../lib";
 import { CharactersContainer } from "./CharactersContainer";
 import { CharactersTable } from "./CharactersTable";
 import { PaginationControls } from "../common";
@@ -13,7 +17,17 @@ export const Characters: FC = () => {
   const { data, isLoading, refetch } = useCharactersQuery(filters);
 
   useEffect(() => {
-    refetch();
+    const timeout = setTimeout(() => {
+      refetch();
+    }, 500);
+
+    return () => {
+      queryClient.cancelQueries({
+        queryKey: [CHARACTERS_QUERY_KEY],
+        exact: true,
+      });
+      clearTimeout(timeout);
+    };
   }, [filters]);
 
   const handlePageChange = (page: number) =>
