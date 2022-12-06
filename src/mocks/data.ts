@@ -1,3 +1,4 @@
+import { CharacterFilter } from "rickmortyapi/dist/interfaces";
 import { Option } from "../types";
 
 export const SPECIES: Option[] = [
@@ -10,3 +11,9 @@ export const SPECIES: Option[] = [
     value: "alien",
   },
 ];
+
+export const DEFAULT_FILTERS: CharacterFilter = {
+  page: 1,
+  name: "",
+  species: "",
+};

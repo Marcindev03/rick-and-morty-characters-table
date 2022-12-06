@@ -19,6 +19,7 @@ export const CustomSelect: FC<CustomSelectProps> = ({
     <Select
       borderColor="secondaryBluePale.40"
       backgroundColor="primaryWhite.400"
+      onChange={(e) => onChange(e.target.value)}
       {...props}
     >
       {availableOptions.map(({ label, value }) => (

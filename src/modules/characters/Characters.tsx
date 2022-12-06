@@ -1,40 +1,29 @@
-import { Heading, HStack, Skeleton } from "@chakra-ui/react";
-import { FC, useState } from "react";
+import { Heading, Skeleton } from "@chakra-ui/react";
+import { FC, useEffect, useState } from "react";
 import { useCharactersQuery } from "../../lib";
-import { SPECIES } from "../../mocks";
-import { CustomSearchbar } from "../common";
-import { CustomSelect } from "../common/CustomSelect";
 import { CharactersContainer } from "./CharactersContainer";
 import { CharactersTable } from "./CharactersTable";
 import { PaginationControls } from "../common";
+import { CharacterFilters } from "./CharacterFilters";
+import { DEFAULT_FILTERS } from "../../mocks";
 
 export const Characters: FC = () => {
-  const [species, setSpecies] = useState("");
-  const [page, setPage] = useState(0);
+  const [filters, setFilters] = useState(DEFAULT_FILTERS);
 
-  const { data, isLoading, refetch } = useCharactersQuery({
-    page,
-    species,
-  });
+  const { data, isLoading, refetch } = useCharactersQuery(filters);
 
-  const handlePageChange = (page: number) => {
-    setPage(page);
+  useEffect(() => {
     refetch();
-  };
+  }, [filters]);
+
+  const handlePageChange = (page: number) =>
+    setFilters((filters) => ({ ...filters, page }));
 
   return (
     <CharactersContainer>
       <Heading fontSize={"2xl"}>Characters</Heading>
 
-      <HStack my="8" spacing="12">
-        <CustomSearchbar />
-        <CustomSelect
-          placeholder="Species"
-          availableOptions={SPECIES}
-          value={species}
-          onChange={setSpecies}
-        />
-      </HStack>
+      <CharacterFilters filters={filters} setFilters={setFilters} />
 
       <Skeleton isLoaded={!isLoading}>
         <CharactersTable characters={data?.results ?? []} />
