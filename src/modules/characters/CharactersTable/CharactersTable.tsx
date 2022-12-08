@@ -1,11 +1,18 @@
-import { Table, TableContainer, Td, Thead, Tr } from "@chakra-ui/react";
+import {
+  Checkbox,
+  Table,
+  TableContainer,
+  Td,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
 import { FC } from "react";
 import { Character } from "rickmortyapi/dist/interfaces";
 import { CharactersList } from "./CharactersList";
 
 const columnsHeadings = [
   {
-    label: "X",
+    label: <Checkbox size="lg" />,
   },
   {
     label: "Name",
@@ -32,10 +39,12 @@ export const CharactersTable: FC<CharactersTableProps> = ({ characters }) => {
   return (
     <TableContainer backgroundColor={"primaryWhite.400"}>
       <Table>
-        <Thead>
+        <Thead color="primaryAnthracite.80">
           <Tr>
-            {columnsHeadings.map(({ label }) => (
-              <Td key={label}>{label}</Td>
+            {columnsHeadings.map(({ label }, index) => (
+              <Td key={`thead_item_${index}`} fontSize="sm">
+                {label}
+              </Td>
             ))}
           </Tr>
         </Thead>

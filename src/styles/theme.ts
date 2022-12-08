@@ -30,6 +30,9 @@ const config = {
     saturatedRed: {
       100: "#FF2626",
     },
+    brandGreen: {
+      400: "#03A99F",
+    },
   },
   styles: {
     global: {
