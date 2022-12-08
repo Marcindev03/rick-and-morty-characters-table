@@ -13,15 +13,15 @@ export const CharactersList: FC<CharactersListProps> = ({
   characters,
   isLoading,
 }) => (
-  <>
+  <Tbody>
     {isLoading ? (
       <SkeletonList />
     ) : (
-      <Tbody>
+      <>
         {characters.map((character) => (
           <CharactersRow key={character.name} character={character} />
         ))}
-      </Tbody>
+      </>
     )}
-  </>
+  </Tbody>
 );

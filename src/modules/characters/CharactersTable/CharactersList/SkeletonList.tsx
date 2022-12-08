@@ -10,8 +10,8 @@ export const SkeletonList: FC<SkeletonListProps> = ({ noOfRows = 20 }) => {
 
   return (
     <>
-      {rows.map(() => (
-        <Tr>
+      {rows.map((key) => (
+        <Tr key={`skeleton_list_item${key}`}>
           <Td></Td>
           <Td>
             <SkeletonText />
