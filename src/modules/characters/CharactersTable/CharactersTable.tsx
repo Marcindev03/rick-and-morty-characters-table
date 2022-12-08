@@ -31,11 +31,12 @@ const columnsHeadings = [
   },
 ];
 
-type CharactersTableProps = {
-  characters: Character[];
-};
+type CharactersTableProps = { isLoading: boolean; characters: Character[] };
 
-export const CharactersTable: FC<CharactersTableProps> = ({ characters }) => {
+export const CharactersTable: FC<CharactersTableProps> = ({
+  isLoading,
+  characters,
+}) => {
   return (
     <TableContainer backgroundColor={"primaryWhite.400"}>
       <Table>
@@ -48,7 +49,7 @@ export const CharactersTable: FC<CharactersTableProps> = ({ characters }) => {
             ))}
           </Tr>
         </Thead>
-        <CharactersList characters={characters} />
+        <CharactersList characters={characters} isLoading={isLoading} />
       </Table>
     </TableContainer>
   );

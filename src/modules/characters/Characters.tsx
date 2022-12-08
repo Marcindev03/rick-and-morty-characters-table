@@ -14,7 +14,7 @@ import { DEFAULT_FILTERS } from "../../mocks";
 export const Characters: FC = () => {
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
 
-  const { data, isLoading, refetch } = useCharactersQuery(filters);
+  const { data, isLoading, refetch, isFetching } = useCharactersQuery(filters);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -39,9 +39,10 @@ export const Characters: FC = () => {
 
       <CharacterFilters filters={filters} setFilters={setFilters} />
 
-      <Skeleton isLoaded={!isLoading}>
-        <CharactersTable characters={data?.results ?? []} />
-      </Skeleton>
+      <CharactersTable
+        characters={data?.results ?? []}
+        isLoading={isLoading || isFetching}
+      />
 
       <PaginationControls totalPages={12} onPageChange={handlePageChange} />
     </CharactersContainer>
