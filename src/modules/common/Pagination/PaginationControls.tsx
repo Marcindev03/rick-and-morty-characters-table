@@ -1,6 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Flex, HStack } from "@chakra-ui/react";
 import { FC, useState } from "react";
+import { cssHideScrollbar } from "../../../styles";
 import { PaginationButton } from "./PaginationButton";
 
 type PaginationControlsProps = {
@@ -34,26 +35,34 @@ export const PaginationControls: FC<PaginationControlsProps> = ({
   };
 
   return (
-    <Flex w="full" justifyContent={"flex-end"}>
-      <HStack mt="12">
-        <PaginationButton onClick={() => handlePageChange(currentPage - 1)}>
-          <ChevronLeftIcon {...iconStyles} />
-        </PaginationButton>
+    <>
+      {totalPages !== 0 ? (
+        <Flex w="full" justifyContent={"flex-end"}>
+          <HStack mt="12" w="20%">
+            <PaginationButton onClick={() => handlePageChange(currentPage - 1)}>
+              <ChevronLeftIcon {...iconStyles} />
+            </PaginationButton>
 
-        {pages.map((page) => (
-          <PaginationButton
-            key={page}
-            isActive={page === currentPage}
-            onClick={() => handlePageChange(page)}
-          >
-            {page}
-          </PaginationButton>
-        ))}
+            <Flex w="90%" overflow={"auto"} css={cssHideScrollbar}>
+              <HStack>
+                {pages.map((page) => (
+                  <PaginationButton
+                    key={page}
+                    isActive={page === currentPage}
+                    onClick={() => handlePageChange(page)}
+                  >
+                    {page}
+                  </PaginationButton>
+                ))}
+              </HStack>
+            </Flex>
 
-        <PaginationButton onClick={() => handlePageChange(currentPage + 1)}>
-          <ChevronRightIcon {...iconStyles} />
-        </PaginationButton>
-      </HStack>
-    </Flex>
+            <PaginationButton onClick={() => handlePageChange(currentPage + 1)}>
+              <ChevronRightIcon {...iconStyles} />
+            </PaginationButton>
+          </HStack>
+        </Flex>
+      ) : null}
+    </>
   );
 };

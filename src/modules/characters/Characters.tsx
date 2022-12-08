@@ -1,4 +1,4 @@
-import { Heading, Skeleton } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import {
   CHARACTERS_QUERY_KEY,
@@ -44,7 +44,10 @@ export const Characters: FC = () => {
         isLoading={isLoading || isFetching}
       />
 
-      <PaginationControls totalPages={12} onPageChange={handlePageChange} />
+      <PaginationControls
+        totalPages={data?.info?.pages ?? 0}
+        onPageChange={handlePageChange}
+      />
     </CharactersContainer>
   );
 };

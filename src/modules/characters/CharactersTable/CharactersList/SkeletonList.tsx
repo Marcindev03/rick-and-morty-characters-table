@@ -5,7 +5,7 @@ type SkeletonListProps = {
   noOfRows?: number;
 };
 
-export const SkeletonList: FC<SkeletonListProps> = ({ noOfRows = 5 }) => {
+export const SkeletonList: FC<SkeletonListProps> = ({ noOfRows = 20 }) => {
   const rows = [...Array(noOfRows).keys()];
 
   return (
